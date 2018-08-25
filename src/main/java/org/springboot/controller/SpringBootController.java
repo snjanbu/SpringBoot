@@ -4,11 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springboot.dto.EmployeeDto;
+import org.springboot.service.SpringBootService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SpringBootController {
+	
+	@Autowired
+	private SpringBootService springBootService;
 	
 	@RequestMapping("/welcome")
 	//If the methodName is not mentioned in RequestMapping,default call would be made to that method.
@@ -18,10 +24,12 @@ public class SpringBootController {
 	
 	@RequestMapping("/list")
 	public List<EmployeeDto> list(){
-		return Arrays.asList(
-				new EmployeeDto(6100, "Sanjay"),
-				new EmployeeDto(6101, "Santhosh"),
-				new EmployeeDto(6102, "Seetha"));
+		return springBootService.getAllEmployeeData();
+	}
+	
+	@RequestMapping("/list/{id}")
+	public EmployeeDto getEmployeeDetail(@PathVariable Integer id) {
+		return springBootService.getEmployeeData(id);
 	}
 
 }
