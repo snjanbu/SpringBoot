@@ -29,9 +29,9 @@ public class SpringBootController {
 		return springBootService.getAllEmployeeData();
 	}
 	
-	@RequestMapping("/list/{id}")
-	public EmployeeDto getEmployeeDetail(@PathVariable Integer id) {
-		return springBootService.getEmployeeData(id);
+	@RequestMapping("/list/{employeeId}")
+	public EmployeeDto getEmployeeDetail(@PathVariable Integer employeeId) {
+		return springBootService.getEmployeeData(employeeId);
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.POST)
@@ -39,14 +39,14 @@ public class SpringBootController {
 		springBootService.addEmployee(employeeDto);
 	}
 	
-	@RequestMapping(value="/list/{id}",method=RequestMethod.PUT)
-	public void updateEmployee(@PathVariable Integer id,@RequestBody EmployeeDto employeeDto) {
-		springBootService.updateEmployee(id, employeeDto);
+	@RequestMapping(value="/list/{employeeId}",method=RequestMethod.PUT)
+	public void updateEmployee(@PathVariable Integer employeeId,@RequestBody EmployeeDto employeeDto) {
+		springBootService.updateEmployee(employeeId, employeeDto);
 	}
 	
-	@RequestMapping(value="/list/{id}",method=RequestMethod.DELETE)
-	public void deleteEmployee(@PathVariable Integer id) {
-		springBootService.deleteEmployee(id);
+	@RequestMapping(value="/list/{employeeId}",method=RequestMethod.DELETE)
+	public void deleteEmployee(@PathVariable Integer employeeId) {
+		springBootService.deleteEmployee(employeeId);
 	}
 
 }
