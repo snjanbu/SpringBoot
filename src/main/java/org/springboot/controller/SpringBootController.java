@@ -7,7 +7,9 @@ import org.springboot.dto.EmployeeDto;
 import org.springboot.service.SpringBootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,6 +32,11 @@ public class SpringBootController {
 	@RequestMapping("/list/{id}")
 	public EmployeeDto getEmployeeDetail(@PathVariable Integer id) {
 		return springBootService.getEmployeeData(id);
+	}
+	
+	@RequestMapping(value="/list",method=RequestMethod.POST)
+	public void addEmployee(@RequestBody EmployeeDto employeeDto) {
+		springBootService.addEmployee(employeeDto);
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.springboot.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SpringBootService {
 
-	List <EmployeeDto>employeeDtoList=Arrays.asList(
+	List <EmployeeDto>employeeDtoList=new ArrayList<>(Arrays.asList(
 			new EmployeeDto(6100, "Sanjay"),
 			new EmployeeDto(6101, "Santhosh"),
-			new EmployeeDto(6102, "Seetha"));
+			new EmployeeDto(6102, "Seetha")));
 	
 	public List<EmployeeDto> getAllEmployeeData(){
 		return employeeDtoList;
@@ -20,5 +21,9 @@ public class SpringBootService {
 	
 	public EmployeeDto getEmployeeData(int id) {
 		return employeeDtoList.stream().filter(value->value.getId()==id).findFirst().get();
+	}
+	
+	public void addEmployee(EmployeeDto employeeDto) {
+		employeeDtoList.add(employeeDto);
 	}
 }
