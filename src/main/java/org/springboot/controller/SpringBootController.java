@@ -38,5 +38,15 @@ public class SpringBootController {
 	public void addEmployee(@RequestBody EmployeeDto employeeDto) {
 		springBootService.addEmployee(employeeDto);
 	}
+	
+	@RequestMapping(value="/list/{id}",method=RequestMethod.PUT)
+	public void updateEmployee(@PathVariable Integer id,@RequestBody EmployeeDto employeeDto) {
+		springBootService.updateEmployee(id, employeeDto);
+	}
+	
+	@RequestMapping(value="/list/{id}",method=RequestMethod.DELETE)
+	public void deleteEmployee(@PathVariable Integer id) {
+		springBootService.deleteEmployee(id);
+	}
 
 }

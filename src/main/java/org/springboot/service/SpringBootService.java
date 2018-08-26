@@ -26,4 +26,14 @@ public class SpringBootService {
 	public void addEmployee(EmployeeDto employeeDto) {
 		employeeDtoList.add(employeeDto);
 	}
+	
+	public void updateEmployee(int id,EmployeeDto employeeDto) {
+		employeeDtoList.stream().filter(value->value.getId()==id).forEach(value->{
+			value.setEmployeeName(employeeDto.getEmployeeName());
+		});
+	}
+	
+	public void deleteEmployee(int id) {
+		employeeDtoList.removeIf(value->value.getId()==id);
+	}
 }
