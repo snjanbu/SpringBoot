@@ -4,36 +4,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springboot.dao.SpringBootDao;
 import org.springboot.dto.EmployeeDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SpringBootService {
 
-	List <EmployeeDto>employeeDtoList=new ArrayList<>(Arrays.asList(
-			new EmployeeDto(6100, "Sanjay"),
-			new EmployeeDto(6101, "Santhosh"),
-			new EmployeeDto(6102, "Seetha")));
+	@Autowired
+	private SpringBootDao springBootDao;
 	
 	public List<EmployeeDto> getAllEmployeeData(){
+		List <EmployeeDto>employeeDtoList=new ArrayList<>();
+		springBootDao.findAll().forEach(employeeDtoList::add);
 		return employeeDtoList;
 	}
 	
 	public EmployeeDto getEmployeeData(int id) {
-		return employeeDtoList.stream().filter(value->value.getId()==id).findFirst().get();
+		return springBootDao.findById(id).get();
 	}
 	
 	public void addEmployee(EmployeeDto employeeDto) {
-		employeeDtoList.add(employeeDto);
+		springBootDao.save(employeeDto);
 	}
 	
 	public void updateEmployee(int id,EmployeeDto employeeDto) {
-		employeeDtoList.stream().filter(value->value.getId()==id).forEach(value->{
-			value.setEmployeeName(employeeDto.getEmployeeName());
-		});
+		springBootDao.save(employeeDto);
 	}
 	
 	public void deleteEmployee(int id) {
-		employeeDtoList.removeIf(value->value.getId()==id);
+		springBootDao.deleteById(id);
 	}
 }

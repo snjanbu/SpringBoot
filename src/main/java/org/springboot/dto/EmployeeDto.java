@@ -1,7 +1,12 @@
 package org.springboot.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class EmployeeDto {
 	
+	@Id
 	private int id;
 
 	private String employeeName;
